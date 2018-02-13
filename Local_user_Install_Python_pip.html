@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Home - Xiangwen Liu's blog</title>
+
+        <link rel="stylesheet" href="./fonts/Serif/cmun-serif.css" />
+        <link rel="stylesheet" href="./fonts/Serif-Slanted/cmun-serif-slanted.css" />
+
+        <!--BOOTSTRAP-->
+        <link href="./bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <!--mobile first-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--removed html from url but still is html-->
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+        <!--font awesome-->
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+        <!--fonts: allan & cardo-->
+        <link href="http://fonts.googleapis.com/css?family=Droid+Serif" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet" type="text/css">
+
+        <link href="./css/sticky-footer-navbar.css" rel="stylesheet">
+
+        <link href="./css/default.css" rel="stylesheet">
+        <link href="./css/index.css" rel="stylesheet">
+
+        <link href="./css/inlineDisqussions.css" rel="stylesheet">
+
+        <!--Highlight-->
+        <link href="./highlight/styles/github.css" rel="stylesheet">
+
+        <link href="./favicon.ico" rel="shortcut icon" />
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-49811703-1', 'cmwenliu.github.io');
+  ga('require', 'linkid', 'linkid.js');
+  ga('require', 'displayfeatures');
+  ga('send', 'pageview');
+
+</script>
+
+
+        <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    </head>
+
+    <body style="background: url('images/bg/bkg2.gif'); background-attachment:fixed;" >
+        <div id="wrap">
+            <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+                <div class="container">
+                    <!--Toggle header for mobile-->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand active" href="./" id="home">Xiangwen Liu's blog</a>
+                    </div>
+                    <!--normal header-->
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="./"><span class="glyphicon glyphicon-pencil"></span>  Blog</a></li>
+                            <li><a href="./about.html"><span class="glyphicon glyphicon-user"></span>  About</a></li>
+                            <li><a href="./contact.html"><span class="glyphicon glyphicon-envelope"></span>  Contact</a></li>
+                        </ul>
+                    </div><!--/.nav-collapse -->
+                </div>
+            </nav>
+
+
+            <div class="container">
+                <div class="col-sm-10 col-sm-offset-1" id="indexwrapper">
+
+
+<style>
+</style>
+<h1>Install Python and pip as local user on shared Linux</h1>
+<h1><span style="color: #800000;">Python3 and pip3</span></h1>
+<hr />
+<h2>1. Create a folder in home directory, download the python source and extract it</h2>
+<pre style="padding-left: 30px;"><span style="background-color: #ccffff;"><code></code></span><span style="background-color: #99ccff;"><code>mkdir ~/python
+cd ~/python
+wget https://www.python.org/ftp/python/3.6.3/Python-3.6.3.tgz
+tar zxfv Python-3.6.3.tgz
+find ~/python -type d | xargs chmod 0755
+cd Python-3.6.3</code></span><code>
+</code></pre>
+<hr />
+<h2>2. Compiled the source following its guideline</h2>
+<pre style="padding-left: 30px;"><span style="background-color: #99ccff;"><code>./configure --prefix=$HOME/python
+make &amp;&amp; make install
+</code></span></pre>
+<p style="padding-left: 30px;">Notice the <code>prefix</code> option, it is mandatory for this to work. The value of prefix option is to specify where to put the related output of <code>make</code> command, by default it is in the <code>/usr/local/</code> and we don't want that so we use our own customized directory.</p>
+<hr />
+<h2>3. Update the environment variables</h2>
+<p style="padding-left: 30px;">Here comes another important step. By the default, if we type <code>python</code> command, it will use the default python of the system. We are going to update the environment variables to force the shell to use our new python. Edit <code>~/.bashrc_profile</code>&nbsp;using : nano or any other editor you prefered and add the following lines:</p>
+<pre style="padding-left: 30px;"><span style="background-color: #99ccff;"><code>export PATH=$HOME/python/Python-3.6.3/:$PATH
+export PYTHONPATH=$HOME/python/Python-3.6.3
+</code></span></pre>
+<hr />
+<h2>4. Refresh and check python version:</h2>
+<pre style="padding-left: 30px;"><span style="background-color: #99ccff;"><code>source ~/.bashrc_profile
+</code></span></pre>
+<p style="padding-left: 30px;">You might need to logout and login again for the environment to update properly. At this point, you should be able to see a new python. To check, run this command:</p>
+<pre style="padding-left: 30px;"><span style="background-color: #99ccff;"><code>which python
+</code></span></pre>
+<p style="padding-left: 30px;">it should show you the path to the <code>python</code> binary file, which is located in your home directory: <code>~/python/Python-3.6.3/python</code></p>
+<hr />
+<h2>5. Install pip</h2>
+<p style="padding-left: 30px;">Pip is a program used to help us easily install python packages, it is similar to <code>rubygems</code> in Ruby world. After installing python locally as described in the first step, it is very easy to install <code>pip</code>.</p>
+<p style="padding-left: 30px;">Run the following command to install pip as a local user</p>
+<pre style="padding-left: 30px;"><span style="background-color: #99ccff;"><code>wget --no-check-certificate https://bootstrap.pypa.io/get-pip.py -O - | python - --user
+</code></span></pre>
+<p style="padding-left: 30px;">After finishing the installation, we need to update our PATH variable. Open ~/.bashrc_profile and add the following line:</p>
+<pre style="padding-left: 30px;"><code>export PATH=$HOME/python/bin:$PATH
+</code></pre>
+<p style="padding-left: 30px;">Again, reload the session by the command <code>source ~/.bashrc_profile</code> or logout and login. Then, check if <code>pip</code> command is available:</p>
+<pre style="padding-left: 30px;"><span style="background-color: #99ccff;"><code>which pip
+</code></span></pre>
+<p style="padding-left: 30px;">It should show a path pointing to your local directory: <code>~/python/bin</code></p>
+<p style="padding-left: 30px;">&nbsp;</p>
+<hr />
+<h2><span style="color: #000000;">Install Python2 and pip will be very similar to the above Python3, incase of unexpected errors, I write done my whole process for your reference.</span></h2>
+<h1><span style="color: #800000;">Python2 and pip</span></h1>
+<hr />
+<h2>1. Create a folder in home directory, download the python source and extract it</h2>
+<pre style="padding-left: 30px;"><code></code><span style="background-color: #99ccff;"><code>mkdir ~/python
+cd ~/python
+wget https://www.python.org/ftp/python/2.7.11/Python-2.7.11.tgz
+tar zxfv Python-2.7.11.tgz
+find ~/python -type d | xargs chmod 0755
+cd Python-2.7.11</code></span><code>
+</code></pre>
+<hr />
+<h2>2. Compiled the source following its guideline</h2>
+<pre style="padding-left: 30px;"><span style="background-color: #99ccff;"><code>./configure --prefix=$HOME/python
+make &amp;&amp; make install
+</code></span></pre>
+<p style="padding-left: 30px;">Notice the <code>prefix</code> option, it is mandatory for this to work. The value of prefix option is to specify where to put the related output of <code>make</code> command, by default it is in the <code>/usr/local/</code> and we don't want that so we use our own customized directory.</p>
+<hr />
+<h2>3. Update the environment variables</h2>
+<p style="padding-left: 30px;">Here comes another important step. By the default, if we type <code>python</code> command, it will use the default python of the system. We are going to update the environment variables to force the shell to use our new python. Edit <code>~/.bashrc_profile</code>&nbsp;using : nano or any other editor you prefered and add the following lines:</p>
+<pre style="padding-left: 30px;"><span style="background-color: #99ccff;"><code>export PATH=$HOME/python/Python-2.7.11/:$PATH
+export PYTHONPATH=$HOME/python/Python-2.7.11
+</code></span></pre>
+<hr />
+<h2>4. Refresh and check python version:</h2>
+<pre style="padding-left: 30px;"><span style="background-color: #99ccff;"><code>source ~/.bashrc_profile
+</code></span></pre>
+<p style="padding-left: 30px;">You might need to logout and login again for the environment to update properly. At this point, you should be able to see a new python. To check, run this command:</p>
+<pre style="padding-left: 30px;"><span style="background-color: #99ccff;"><code>which python
+</code></span></pre>
+<p style="padding-left: 30px;">it should show you the path to the <code>python</code> binary file, which is located in your home directory: <code>~/python/Python-2.7.11/python</code></p>
+<hr />
+<h2>5. Install pip</h2>
+<p style="padding-left: 30px;">Pip is a program used to help us easily install python packages, it is similar to <code>rubygems</code> in Ruby world. After installing python locally as described in the first step, it is very easy to install <code>pip</code>.</p>
+<p style="padding-left: 30px;">Run the following command to install pip as a local user</p>
+<pre style="padding-left: 30px;"><span style="background-color: #99ccff;"><code>wget --no-check-certificate https://bootstrap.pypa.io/get-pip.py -O - | python - --user
+</code></span></pre>
+<p style="padding-left: 30px;">After finishing the installation, we need to update our PATH variable. Open ~/.bashrc_profile and add the following line:</p>
+<pre style="padding-left: 30px;"><span style="background-color: #99ccff;"><code>export PATH=$HOME/python/bin:$PATH
+</code></span></pre>
+<p style="padding-left: 30px;">Again, reload the session by the command <code>source ~/.bashrc_profile</code> or logout and login. Then, check if <code>pip</code> command is available:</p>
+<pre style="padding-left: 30px;"><span style="background-color: #99ccff;"><code>which pip
+</code></span></pre>
+<p style="padding-left: 30px;">It should show a path pointing to your local directory: <code>~/python/bin</code></p>
+<p style="padding-left: 30px;">Having both <code>python</code> and <code>pip</code> installed as a local user, you can install any other packages you want without worrying about other parts of the whole system. This is extremely useful in case you want to experiment with new things.</p>
+<p style="padding-left: 30px;">I hope this tutorial is helpful to you. If you have any trouble following the tutorial, please let me know.</p>
+<p style="padding-left: 30px;">Happy Coding!</p>
+<p style="padding-left: 30px;">&nbsp;</p>
+
+<!--<p style="font-weight: bold; font-size: 150%;"><a href="./archive.html">See the complete list of posts.</a> -->
+
+<br>
+<br>
+
+                </div>
+            </div>
+
+    <!-- jQuery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+
+    <script src="./bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="./highlight/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <script src="./js/footnotes.js"></script>
+
+    <script src="./js/inlineDisqussions.js"></script>
+
+    <noscript>Enable JavaScript for footnotes, Disqus comments, and other cool stuff.</noscript>
+
+    </body>
+
+</html>
