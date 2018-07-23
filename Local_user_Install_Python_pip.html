@@ -180,7 +180,7 @@ export PYTHONPATH=$HOME/python/Python-2.7.11
 <pre style="padding-left: 30px;"><span style="background-color: #99ccff;"><code>wget --no-check-certificate https://bootstrap.pypa.io/get-pip.py -O - | python - --user
 </code></span></pre>
 <p style="padding-left: 30px;">After finishing the installation, we need to update our PATH variable. Open ~/.bashrc_profile and add the following line:</p>
-<pre style="padding-left: 30px;"><span style="background-color: #99ccff;"><code>export PATH=$HOME/python/bin:$PATH
+<pre style="padding-left: 30px;"><span style="background-color: #99ccff;"><code>export PATH=$HOME/.local/bin:$PATH
 </code></span></pre>
 <p style="padding-left: 30px;">Again, reload the session by the command <code>source ~/.bashrc_profile</code> or logout and login. Then, check if <code>pip</code> command is available:</p>
 <pre style="padding-left: 30px;"><span style="background-color: #99ccff;"><code>which pip
